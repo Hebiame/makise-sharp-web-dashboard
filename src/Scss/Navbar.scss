@@ -1,0 +1,24 @@
+@import '../Scss/colors.scss';
+
+nav {
+  background-color: $primaryColor;
+  color: $secondaryColor;
+
+  a, button {
+    color: $secondaryColor;
+    font-family: 'Roboto Light';
+    font-size: 1.3rem;
+    background-color: transparent;
+  }
+  a:hover, a:active {
+    color: $secondaryColor;
+    text-decoration: none;
+  }
+  ::selection {
+    background: $secondaryColorTr;
+  }
+}
+
+.logo {
+  height: 30px;
+}
