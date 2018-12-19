@@ -1,6 +1,7 @@
 {
   "name": "makise-sharp-web-dashboard",
   "version": "0.1.0",
+  "homepage": "https://makise.club",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.3",
