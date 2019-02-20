@@ -1,15 +1,17 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
-import { AuthConsumer } from '../Components/AuthContext';
+import AuthContext from '../Components/AuthContext';
 
-const Callback = props => (
-  <AuthConsumer>
-    {({handleAuthorization}) => {
-      handleAuthorization(props.location.search);
-      return <Redirect to="/"/>;
-    }}
-  </AuthConsumer>
-)
+class CallbackPage extends React.Component {
+  async componentDidMount () {
+    let value = this.context;
+    await value.handleCallback();
+    this.props.history.replace('/');
+  }
 
-export default Callback
+  render () {
+    return null;
+  }
+}
 
+CallbackPage.contextType = AuthContext;
+export default CallbackPage;

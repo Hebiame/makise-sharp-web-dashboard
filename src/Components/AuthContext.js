@@ -1,59 +1,116 @@
 import React, { Component } from 'react';
-import RandomStringGenerator from '../Utils/RandomStringGenerator'
+import * as Oidc from 'oidc-client';
 
 const AuthContext = React.createContext();
-const DiscordAuthLink = "https://discordapp.com/api/oauth2/authorize?client_id=289512616559378432&redirect_uri=http%3A%2F%2F109.200.92.6%3A25565%2Fdashboard%2flogin&response_type=code&scope=identify";
-const Generator = new RandomStringGenerator('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', 55);
 
 class AuthProvider extends Component {
-
-  state = {
-    authorized: false,
-    stateCode: Generator.generate(),
-    accessToken: ''
-  };
-
-  constructor(props) {
+  constructor (props) {
     super(props);
-    this.redirect = this.redirect.bind(this);
-    this.revokeAuthorization = this.revokeAuthorization.bind(this);
+
+    if (process.env.NODE_ENV === 'development') {
+      Oidc.Log.logger = console;
+      Oidc.Log.level = Oidc.Log.INFO;
+    }
+
+    const settings = {
+      authority: process.env.REACT_APP_AUTHORITY,
+      client_id: 'dashboard',
+      post_logout_redirect_uri: process.env.REACT_APP_POST_LOGOUT_REDIRECT_URI,
+      redirect_uri: process.env.REACT_APP_REDIRECT_URI,
+      response_type: 'id_token token',
+      scope: 'openid discord makise',
+      accessTokenExpiringNotificationTime: 4,
+      automaticSilentRenew: true,
+      filterProtocolClaims: false,
+      checkSessionInterval: 5000,
+      silent_redirect_uri: process.env.REACT_APP_SILENT_REDIRECT_URI
+    };
+
+    let userManager = new Oidc.UserManager(settings);
+    this.state = { userManager: userManager };
+
     this.handleAuthorization = this.handleAuthorization.bind(this);
-  }
+    this.handleCallback = this.handleCallback.bind(this);
+    this.handleSilentLogin = this.handleSilentLogin.bind(this);
+    this.handleSilentCallback = this.handleSilentCallback.bind(this);
 
-  redirect() {
-    window.location.assign(DiscordAuthLink + '&state=' + this.state.stateCode);
-  }
+    userManager.clearStaleState().then(() =>
+      userManager.getUser().then((loadedUser) => {
+        if (loadedUser) {
+          this.setState({ user: loadedUser });
+        }
+      })
+    );
 
-  revokeAuthorization() {
-    this.setState({
-      authorized: false,
-      stateCode: Generator.generate(),
-      accessToken: ''
+    userManager.events.addUserLoaded((loadedUser) => {
+      if (loadedUser) {
+        this.setState({ user: loadedUser });
+      }
+    });
+
+    userManager.events.addSilentRenewError(async () => {
+      await userManager.removeUser();
+      this.setState({ user: null });
+    });
+
+    userManager.events.addUserSignedOut(async () => {
+      await userManager.removeUser();
+      this.setState({ user: null });
+    });
+
+    userManager.events.addUserUnloaded(() => {
+      this.setState({ user: null });
     });
   }
 
-  handleAuthorization(hash) {
-
+  async handleCallback () {
+    await this.state.userManager.signinRedirectCallback()
+      .then((user) => this.setState({ user: user }))
+      .catch((error) => {
+        console.error('error while processing the callback', error);
+      });
   }
 
-  render() {
+  handleSilentCallback () {
+    this.state.userManager.signinSilentCallback()
+      .catch((error) => {
+        console.error('error while processing the silent callback', error);
+      });
+  }
+
+  handleSilentLogin () {
+    this.state.userManager.signinSilent()
+      .catch((error) => {
+        console.error('error during silent login', error);
+      });
+  }
+
+  handleAuthorization () {
+    this.state.userManager.signinRedirect()
+      .catch((error) => {
+        console.error('error during signing-in', error);
+      });
+  }
+
+  render () {
     return (
       <AuthContext.Provider
         value={{
-          authorized: this.state.authorized,
-          stateCode: this.state.stateCode,
-          accessToken: this.state.accessToken,
-          redirect: this.redirect,
-          revoke: this.revokeAuthorization,
-          handleAuthorization: this.handleAuthorization
+          handleAuthorization: this.handleAuthorization,
+          handleCallback: this.handleCallback,
+          handleSilentLogin: this.handleSilentLogin,
+          handleSilentCallback: this.handleSilentCallback,
+          user: this.state.user,
+          loading: this.state.loading
         }}
       >
         {this.props.children}
       </AuthContext.Provider>
-    )
+    );
   }
 }
 
 const AuthConsumer = AuthContext.Consumer;
 
 export { AuthProvider, AuthConsumer };
+export default AuthContext;

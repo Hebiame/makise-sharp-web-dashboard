@@ -1,32 +1,27 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import './Scss/App.scss';
-import StartPage from './Pages/Start';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CallbackPage from './Pages/Callback';
+import LoginPage from './Pages/Login';
+import SilentCallbackPage from './Pages/SilentCallback';
+import SilentLoginPage from './Pages/SilentLogin';
 import NotFoundPage from './Pages/NotFound';
-import Navbar from './UIComponents/Navbar';
-import { AuthProvider } from "./Components/AuthContext";
+import StartPage from './Pages/Start';
+import { AuthProvider } from './Components/AuthContext';
+import './Scss/App.scss';
 
-class App extends Component {
-
-  render() {
-    return (
-      <Router basename={'/dashboard/'}>
-        <div className='container-fluid pl-0 pr-0'>
-          <AuthProvider>
-            <Navbar />
-            <Switch>
-              <Redirect from='/' exact to='/start' />
-              <Route exact path='/start' component={StartPage} />
-              <Route exact path='/login' component={CallbackPage} />
-              <Route component={NotFoundPage} />
-            </Switch>
-          </AuthProvider>
-        </div>
-      </Router>
-    );
-  }
-
-}
+const App = props => (
+  <Router>
+    <AuthProvider>
+      <Switch>
+        <Route exact path='/' component={StartPage} />
+        <Route exact path='/login' component={LoginPage} />
+        <Route exact path='/dashboard/callback' component={CallbackPage} />
+        <Route exact path='/dashboard/silent-callback' component={SilentCallbackPage} />
+        <Route exact path='/dashboard/silent-login' component={SilentLoginPage} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </AuthProvider>
+  </Router>
+);
 
 export default App;
