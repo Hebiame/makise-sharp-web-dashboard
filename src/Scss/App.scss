@@ -1,4 +1,16 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap.scss';
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,500);
+
 @font-face {
-  font-family: "Roboto Light";
-  src: url("../Assets/Roboto-Light.ttf");
+  font-family: "Bakersfield Light";
+  src: url("../Fonts/Bakersfield Light.ttf");
 }
+
+html, body {
+  background-color: #f6cabe;
+}
+
+@import 'StartPage';
+

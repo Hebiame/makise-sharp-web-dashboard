@@ -1,0 +1,125 @@
+@import 'variables';
+
+@media only screen and (max-width : 767px) {
+  main.start-page {
+    box-shadow: inset 0 0 0 1000px rgba(80, 46, 46, .73);
+    height: calc(100vh - #{$navHeightSmall});
+    margin-top: $navHeightSmall;
+    background-image:  url("../Images/makise.png"), url("../Images/background.svg");
+    background-repeat: no-repeat, no-repeat;
+    background-position: center bottom, 0 0;
+    padding-top: 2vh;
+    text-align: center;
+  }
+}
+
+@media (max-width : 767px) and (orientation : landscape) {
+  main.start-page {
+    box-shadow: none;
+    background-position: 5% bottom, 0 0;
+    background-size: contain, cover;
+    text-align: right;
+
+    .header-text {
+      padding-left: 40vw;
+      padding-right: 5vw;
+    }
+    h1 {
+      font-size: 10vh;
+    }
+    p:first-of-type {
+      font-size: 4vh;
+    }
+  }
+}
+
+@media (max-width : 767px) and (orientation : portrait) {
+  main.start-page {
+    background-size: 75vh, cover;
+
+    h1 {
+      font-size: 18vw;
+    }
+    p:first-of-type {
+      font-size: 6vw;
+      padding: 0 6vw;
+    }
+  }
+}
+
+@media only screen and (min-width : 768px) {
+  main.start-page {
+    background-image: url("../Images/makise.png"), url("../Images/background.svg");
+    background-size: contain, cover;
+    background-repeat: no-repeat, no-repeat;
+    background-position: 3% bottom, 0 0;
+    margin-top: $navHeightBig;
+    padding-top: 2vh;
+    height: calc(100vh - #{$navHeightBig});
+
+    h1 {
+      font-size: 6vw;
+    }
+    p:first-of-type {
+      font-size: 2.5vw;
+      padding: 0 100px;
+    }
+  }
+  //nav {
+  //  a {
+  //    //padding: $navPaddingBig;
+  //  }
+  //  a.discord-link {
+  //    padding-left: 10px;
+  //  }
+  //}
+
+}
+
+@media only screen and (min-width : 768px) and (orientation : portrait) {
+  main.start-page {
+    background-position: -25vh bottom, 0 0;
+
+    h1 {
+      font-size: 10vw;
+      padding: 0 4vw;
+    }
+    p:first-of-type {
+      font-size: 4vw;
+    }
+  }
+}
+
+@media only screen and (min-width : 768px) and (max-width : 1200px) {
+  main.start-page {
+    background-position: -25vh bottom, 0 0;
+
+    h1 {
+      font-size: 8vw;
+      padding: 0 7.5vw;
+    }
+    p:first-of-type {
+      font-size: 3.5vw;
+    }
+  }
+}
+
+main.start-page {
+  h1 {
+    color: $secondaryColor;
+    font-family: "Bakersfield Light";
+    text-transform: uppercase;
+  }
+
+  p:first-of-type {
+    color: $secondaryColor;
+    font-family: "Bakersfield Light";
+  }
+  ::selection {
+    background: $primaryColorSelect;
+  }
+}
+
+main {
+  overflow: hidden;
+}
