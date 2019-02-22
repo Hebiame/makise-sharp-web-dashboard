@@ -173,12 +173,12 @@ nav {
     .navbar-collapse a {
       width: 100%;
 
-      > button {
+      .login-btn {
         background-color: $primaryColorHover;
         height: auto;
         width: 100%;
       }
-      button {
+      button.dropdown-item {
         background-color: transparent;
       }
     }
