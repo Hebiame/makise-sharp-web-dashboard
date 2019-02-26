@@ -5,7 +5,7 @@ import LoginPage from './Pages/Login';
 import SilentCallbackPage from './Pages/SilentCallback';
 import SilentLoginPage from './Pages/SilentLogin';
 import NotFoundPage from './Pages/NotFound';
-import StartPage from './Pages/Start';
+import StartPage from './Pages/Start/Start';
 import { AuthProvider } from './Components/AuthContext';
 import './Scss/App.scss';
 
