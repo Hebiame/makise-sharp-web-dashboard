@@ -34,14 +34,6 @@ class AuthProvider extends Component {
     this.handleSilentLogin = this.handleSilentLogin.bind(this);
     this.handleSilentCallback = this.handleSilentCallback.bind(this);
 
-    userManager.clearStaleState().then(() =>
-      userManager.getUser().then((loadedUser) => {
-        if (loadedUser) {
-          this.setState({ user: loadedUser });
-        }
-      })
-    );
-
     userManager.events.addUserLoaded((loadedUser) => {
       if (loadedUser) {
         this.setState({ user: loadedUser });
@@ -63,9 +55,22 @@ class AuthProvider extends Component {
     });
   }
 
+  async componentDidMount () {
+    let user = await this.state.userManager.getUser();
+    if (!user) {
+      try {
+        user = await this.state.userManager.signinSilent();
+      } catch (error) {
+        console.error('error during silent login', error);
+        this.setState({ user: null });
+        return;
+      }
+    }
+    this.setState({ user: user });
+  }
+
   async handleCallback () {
     await this.state.userManager.signinRedirectCallback()
-      .then((user) => this.setState({ user: user }))
       .catch((error) => {
         console.error('error while processing the callback', error);
       });
@@ -100,8 +105,7 @@ class AuthProvider extends Component {
           handleCallback: this.handleCallback,
           handleSilentLogin: this.handleSilentLogin,
           handleSilentCallback: this.handleSilentCallback,
-          user: this.state.user,
-          loading: this.state.loading
+          user: this.state.user
         }}
       >
         {this.props.children}
