@@ -35,7 +35,7 @@ const UserControl = () => (
               <a href='https://identity.makise.club/connect/endsession' className='w-100'>
                 <DropdownItem className='text-left'>
                   <img src={logout} alt='logout icon' width='23' className='mr-2' />
-                    Logout
+                  Logout
                 </DropdownItem>
               </a>
             </DropdownMenu>
@@ -47,5 +47,4 @@ const UserControl = () => (
     }}
   </AuthConsumer>
 );
-
 export default UserControl;
