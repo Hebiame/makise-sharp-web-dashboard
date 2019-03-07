@@ -5,6 +5,8 @@ import LoginButton from './LoginButton';
 import UserInfo from './UserInfo';
 import UserAvatar from './UserAvatar';
 import logout from '../Images/logout.svg';
+import { css } from '@emotion/core';
+import LoadingSpinner from './LoadingSpinner';
 
 const UserControl = () => (
   <AuthConsumer>
@@ -40,6 +42,12 @@ const UserControl = () => (
               </a>
             </DropdownMenu>
           </UncontrolledButtonDropdown>
+        );
+      } else if (typeof value.user === 'undefined') {
+        return (
+          <div className='ml-auto mt-2 mr-5 pr-3'>
+            <LoadingSpinner css={css`box-sizing: content-box;`} />
+          </div>
         );
       } else {
         return <LoginButton />;
