@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 class RandomDescription extends Component {
 
@@ -10,7 +10,7 @@ class RandomDescription extends Component {
   ];
 
   render() {
-    return <p>{this.descriptions[Math.floor(Math.random() * this.descriptions.length)]}</p>;
+    return this.descriptions[Math.floor(Math.random() * this.descriptions.length)];
   }
 }
 

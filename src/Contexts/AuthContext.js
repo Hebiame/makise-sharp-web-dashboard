@@ -76,17 +76,17 @@ class AuthProvider extends Component {
       });
   }
 
-  handleSilentCallback () {
-    this.state.userManager.signinSilentCallback()
-      .catch((error) => {
-        console.error('error while processing the silent callback', error);
-      });
-  }
-
   handleSilentLogin () {
     this.state.userManager.signinSilent()
       .catch((error) => {
         console.error('error during silent login', error);
+      });
+  }
+
+  handleSilentCallback () {
+    this.state.userManager.signinSilentCallback()
+      .catch((error) => {
+        console.error('error while processing the silent callback', error);
       });
   }
 
@@ -115,6 +115,5 @@ class AuthProvider extends Component {
 }
 
 const AuthConsumer = AuthContext.Consumer;
-
 export { AuthProvider, AuthConsumer };
 export default AuthContext;

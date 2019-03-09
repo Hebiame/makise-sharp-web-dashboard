@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import AuthContext from '../Components/AuthContext';
+import AuthContext from '../Contexts/AuthContext';
 
 class LoginPage extends Component {
   async componentDidMount () {

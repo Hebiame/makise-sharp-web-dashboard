@@ -1,11 +1,13 @@
 $primaryColor: #bc262f;
 $primaryColorSelect: rgba(188,38,47,0.27);
-$primaryColorHover: #c82333;
 $secondaryColor: #fff;
 $secondaryColorSelect: rgba(255,255,255,0.27);
 $opacity: 0.8;
 $navHeightBig: 67px;
 $navHeightSmall: 46px;
+
+$md: 768px;
+$xl: 1200px;
 
 $theme-colors: (
         "makise-primary":           $primaryColor,

@@ -1,0 +1,25 @@
+@import '../variables';
+@import '../mixins';
+
+.makise-nav {
+  height: $navHeightBig;
+  font-family: 'Raleway', sans-serif;
+  & ::selection {
+    background: $secondaryColorSelect;
+  }
+  @include until($md) {
+    height: $navHeightSmall;
+    .login-button--mobile-bg-light {
+      background-color: lighten($primaryColor, 4%);
+    }
+    .user-button--mobile-bg-light {
+      background-color: lighten($primaryColor, 4%);
+    }
+  }
+}
+.makise-nav__logo {
+  height: 30px;
+}
+.makise-nav__navbar-toggler {
+  @include on-click-decoration-none;
+}

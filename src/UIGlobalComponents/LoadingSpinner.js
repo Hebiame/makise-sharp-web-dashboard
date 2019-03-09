@@ -75,4 +75,3 @@ LoadingSpinner.defaultProps = {
 const Component = onlyUpdateForKeys(['loading', 'color', 'size', 'sizeUnit', 'css'])(LoadingSpinner);
 Component.defaultProps = LoadingSpinner.defaultProps;
 export default Component;
-
