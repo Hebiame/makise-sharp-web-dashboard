@@ -32,7 +32,6 @@ class AuthProvider extends Component {
     this.handleAuthorization = this.handleAuthorization.bind(this);
     this.handleCallback = this.handleCallback.bind(this);
     this.handleSilentLogin = this.handleSilentLogin.bind(this);
-    this.handleSilentCallback = this.handleSilentCallback.bind(this);
 
     userManager.events.addUserLoaded((loadedUser) => {
       if (loadedUser) {
@@ -76,13 +75,6 @@ class AuthProvider extends Component {
       });
   }
 
-  handleSilentCallback () {
-    this.state.userManager.signinSilentCallback()
-      .catch((error) => {
-        console.error('error while processing the silent callback', error);
-      });
-  }
-
   handleSilentLogin () {
     this.state.userManager.signinSilent()
       .catch((error) => {
@@ -104,7 +96,6 @@ class AuthProvider extends Component {
           handleAuthorization: this.handleAuthorization,
           handleCallback: this.handleCallback,
           handleSilentLogin: this.handleSilentLogin,
-          handleSilentCallback: this.handleSilentCallback,
           user: this.state.user
         }}
       >
@@ -115,6 +106,5 @@ class AuthProvider extends Component {
 }
 
 const AuthConsumer = AuthContext.Consumer;
-
 export { AuthProvider, AuthConsumer };
 export default AuthContext;
