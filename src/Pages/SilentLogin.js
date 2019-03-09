@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthConsumer } from '../Components/AuthContext';
+import { AuthConsumer } from '../Contexts/AuthContext';
 
 const SilentLoginPage = () => (
   <AuthConsumer>

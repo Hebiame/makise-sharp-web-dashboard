@@ -1,0 +1,9 @@
+@import '../variables';
+@import '../mixins';
+
+.spinner--user-control {
+  @include until($md) {
+    width: 100%;
+    background-color: lighten($primaryColor, 4%);
+  }
+}

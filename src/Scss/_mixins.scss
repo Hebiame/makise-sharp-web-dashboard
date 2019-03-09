@@ -1,0 +1,33 @@
+@import './variables';
+
+@mixin on-click-decoration-none {
+  &:focus {
+    box-shadow: none!important;
+    outline: none!important;
+  }
+}
+@mixin until($device-width) {
+  @media only screen and (max-width: $device-width - 1) {
+    @content
+  }
+}
+@mixin at-least($device-width) {
+  @media only screen and (min-width: $device-width) {
+    @content
+  }
+}
+@mixin until-and-orientation($device-width, $orientation) {
+  @media only screen and (max-width: $device-width - 1) and (orientation: $orientation) {
+    @content
+  }
+}
+@mixin at-least-and-orientation($device-width, $orientation) {
+  @media only screen and (min-width: $device-width) and (orientation: $orientation) {
+    @content
+  }
+}
+@mixin at-least-and-until($device-width1, $device-width2) {
+  @media only screen and (min-width: $device-width1) and (max-width: $device-width2){
+    @content
+  }
+}

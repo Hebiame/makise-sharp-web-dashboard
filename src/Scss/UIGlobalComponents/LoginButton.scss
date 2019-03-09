@@ -1,0 +1,27 @@
+@import '../variables';
+@import '../mixins';
+
+.login-button {
+  @include on-click-decoration-none;
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  @include until($md) {
+    height: auto;
+    width: 100%;
+  }
+  &:focus,
+  &:hover,
+  &:active {
+    outline: none;
+    cursor: pointer;
+    box-shadow: none!important;
+  }
+}
+.login-button__text {
+  font-size: 1.25rem!important;
+}
+.login-button__discord-logo {
+  height: 48px;
+  padding-left: 5px;
+}

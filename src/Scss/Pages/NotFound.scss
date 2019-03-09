@@ -1,0 +1,49 @@
+@import '../variables';
+@import '../mixins';
+
+.notfound-page {
+  height: 100vh;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  padding-left: 6vw;
+  padding-right: 6vw;
+  @include until($md) {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+  & ::selection {
+    background: $primaryColorSelect;
+  }
+}
+.notfound-page__title {
+  color: $primaryColor;
+  font-size: 5.5vw;
+  font-weight: 400;
+  @include until($md) {
+    font-size: 1.8em;
+  }
+}
+.notfound-page__description {
+  color: $primaryColor;
+  font-size: 2.1vw;
+  line-height: 2.6vw;
+  @include until($md) {
+    font-size: 1.3em;
+    line-height: 1.1em;
+  }
+}
+.notfound-page__button {
+  margin-top: 1vw;
+  font-size: 1.4vw;
+  @include until($md) {
+    margin-top: 1vw;
+    font-size: 1.5em;
+  }
+}
+.notfound-page__img {
+  opacity: 0.9;
+  width: 30vw;
+  @include until($md) {
+    width: 80vw;
+  }
+}

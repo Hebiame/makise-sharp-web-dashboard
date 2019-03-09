@@ -1,7 +1,7 @@
-import React from 'react';
-import AuthContext from '../Components/AuthContext';
+import { Component } from 'react';
+import AuthContext from '../Contexts/AuthContext';
 
-class CallbackPage extends React.Component {
+class CallbackPage extends Component {
   async componentDidMount () {
     let value = this.context;
     await value.handleCallback();

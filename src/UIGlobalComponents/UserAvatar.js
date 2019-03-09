@@ -5,7 +5,7 @@ function makeAvatarUrl (hash, userId) {
 }
 
 const UserAvatar = (props) => (
-  <img src={makeAvatarUrl(props.avatarHash, props.userId)} alt='avatar' className='user-avatar' />
+  <img src={makeAvatarUrl(props.avatarHash, props.userId)} alt='avatar' className='user-button__avatar' />
 );
 
 export default UserAvatar;
