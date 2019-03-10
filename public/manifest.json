@@ -1,15 +1,20 @@
 {
-  "short_name": "MakiseSharp Dashboard",
-  "name": "MakiseSharp Dashboard",
+  "short_name": "Makise#",
+  "name": "MakiseSharp",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#a9161f",
   "background_color": "#ffffff"
 }
